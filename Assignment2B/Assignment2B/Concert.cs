@@ -57,7 +57,7 @@ namespace Assignment2B
         {
             return new Concert(c.Title, c.Location, c.Date, c.Time, c.Price - 5);
         }
-        //Tutkii ovatko 2 Concert obj samaa ja tarkistaa ettei kumpikaan ole null
+        //Checks if the 
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
@@ -66,7 +66,7 @@ namespace Assignment2B
             }
 
             Concert c = (Concert)obj;
-            return Price == c.Price;
+            return Title == c.Title && Location == c.Location && Date == c.Date && Time == c.Time && Price == c.Price;
         }
     }
 }
