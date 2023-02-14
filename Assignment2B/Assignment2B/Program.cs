@@ -24,12 +24,35 @@ namespace Assignment2B
             concertList.Add(concert4);
             concertList.Add(concert5);
 
-            concertList.Sort();
+            //saa "€" näkyviin 
+            Console.OutputEncoding = Encoding.UTF8;
 
             foreach (Concert concert in concertList)
             {
                 Console.WriteLine(concert.GetConcertInfo());
-            }         
+            }
+
+           Console.WriteLine("");
+
+            concertList.Sort((x, y) => x.Price.CompareTo(y.Price));
+
+            foreach (Concert concert in concertList)
+            {
+                Console.WriteLine(concert.GetConcertInfo());
+            }
+            //Increase the price of the first concert by 5
+            Concert increasedPrice1 = ++concert1;
+            Console.WriteLine("\n" + "The increased price of the first concert is: {0:C}" + "\n", increasedPrice1.Price);
+
+            //Decrease the price of the third concert by 5
+            Concert decreasedPrice3 = --concert3;
+            Console.WriteLine("The decreased price of the third concert is: {0:C}" + "\n", decreasedPrice3.Price);
+
+            //Check if the first and second concerts are equal
+            Console.WriteLine("Are the first and second concerts equal? {0}" + "\n", concert1 == concert2);
+
+            //Check if the fourth concert is smaller than the fifth
+            Console.WriteLine("Is the fourth concert smaller than the fifth? {0}" + "\n", concert4 < concert5);
         }
     }
 }
