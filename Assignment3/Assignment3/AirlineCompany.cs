@@ -1,53 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 
 namespace Assignment3
 {
-    internal class AirlineCompany
+    using System;
+    using System.Collections;
+
+    public class AirlineCompany
     {
         public readonly string AirlineName;
-        private SortedList<Flight, double> flights;
+        private SortedList flights;
 
-        public AirlineCompany(string name)
+        public AirlineCompany(string airlineName)
         {
-            AirlineName = name;
-            flights = new SortedList<Flight, double>();
+            this.AirlineName = airlineName;
+            flights = new SortedList();
         }
 
-        public void AddFlight(Flight flight, double price)
+        // Indexer to get and set Flight objects
+        public Flight this[int index]
         {
-            flights.Add(flight, price);
+            get { return (Flight)flights.GetByIndex(index); }
+            set { flights.Add(value.Price, value); }
         }
 
+        // Method that returns the Flight object if the flight id is provided
         public Flight FindFlight(int id)
         {
-            foreach (var flight in flights)
+            foreach (DictionaryEntry entry in flights)
             {
-                if (flight.Key.Id == id)
+                Flight f = (Flight)entry.Value;
+                if (f.Id == id)
                 {
-                    return flight.Key;
+                    return f;
                 }
             }
             return null;
         }
 
+        // Method that returns the Flight object with the lowest price
         public Flight GetCheapestFlight()
         {
-            return flights.Keys[0];
+            Flight f = (Flight)flights.GetByIndex(0);
+            return f;
         }
 
+        // Method that returns the Flight object with the highest price
         public Flight GetMostExpensiveFlight()
         {
-            return flights.Keys[flights.Count - 1];
-        }
-
-        public SortedList<Flight, double> this[int index]
-        {
-            get { return flights; }
-            set { flights = value; }
+            Flight f = (Flight)flights.GetByIndex(flights.Count - 1);
+            return f;
         }
     }
+
 }

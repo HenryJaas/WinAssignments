@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment3
 {
-    internal class Flight
+    public class Flight
     {
         public int Id { get; set; }
         public string Origin { get; set; }
@@ -16,11 +12,12 @@ namespace Assignment3
 
         public Flight(int id, string origin, string destination, DateTime date, double price)
         {
-            Id = id;
-            Origin = origin;
-            Destination = destination;
-            Date = date;
-            Price = price;
+            this.Id = id;
+            this.Origin = origin;
+            this.Destination = destination;
+            this.Date = date;
+            this.Price = price;
         }
     }
 }
+    
