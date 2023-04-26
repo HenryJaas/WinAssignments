@@ -31,7 +31,8 @@ namespace Assignment4
                 Console.WriteLine("4. Delete a flight");
                 Console.WriteLine("5. View cheapest flight");
                 Console.WriteLine("6. View most expensive flight");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Search for a flight");
+                Console.WriteLine("8. Exit");
 
                 Console.Write("\nEnter your choice: ");
                 string choice = Console.ReadLine();
@@ -122,6 +123,21 @@ namespace Assignment4
                         break;
 
                     case "7":
+                        Console.WriteLine("\n------- SEARCH FOR A FLIGHT -------");
+                        Console.Write("Enter flight ID to edit: ");
+                        int searchId = int.Parse(Console.ReadLine());
+
+                        Flight searchFlight = airline.FindFlight(searchId);
+                       
+                        if (searchFlight == null)
+                        {
+                            Console.WriteLine("Flight not found.");
+                            break;
+                        }
+                        Console.WriteLine($"Flight ID: {searchFlight.Id} | Origin: {searchFlight.Origin} | Destination: {searchFlight.Destination} | Date: {searchFlight.Date} | Price: {searchFlight.Price}");
+                        break;
+
+                    case "8":
                         exit = true;
                         Console.WriteLine("\nGoodbye!");
                         break;

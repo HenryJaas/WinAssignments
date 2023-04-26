@@ -4,34 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment4
+namespace AssignmentBeta
 {
     public class AirlineCompany
     {
 
         readonly string airlineName;
-        SortedList<Flight, double> flights = new SortedList<Flight, double>(new FlightComparer());
+        SortedList<double, Flight> flights;
 
         public AirlineCompany(string airlineName)
         {
-            airlineName = airlineName;
+            this.airlineName = airlineName;           
         }
 
         public void AddFlight(Flight flight)
         {
-            flights.Add(flight, flight.Price);
+            flights.Add(flight.Price, flight);
         }
 
         public void DeleteFlight(Flight flight)
         {
             flights.Remove(flight);
-        }
-
-        public void EditFlight(Flight flight, double newPrice)
-        {
-            flights.Remove(flight);
-            flight.Price = newPrice;
-            flights.Add(flight, newPrice);
         }
 
         public Flight FindFlight(int id)
@@ -64,8 +57,21 @@ namespace Assignment4
 
         public Flight this[int index]
         {
-            get { return flights.Keys[index]; }
-            set { flights.Keys[index] = value; }
+            get
+            {
+                foreach (Flight flight in flights.Values)
+                {
+                    if (flight.Id == index)
+                    {
+                        return flight;
+                    }
+                }
+                return new Flight();
+            }
+            set
+            {
+                flights.Add(value.Price, value);
+            }
         }
 
         private class FlightComparer : IComparer<Flight>
