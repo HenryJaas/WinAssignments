@@ -14,6 +14,10 @@ namespace AssignmentBeta
         DateTime date;
         double price;
 
+        public Flight()
+        { }
+         
+
         public Flight(int id, string origin, string destination, DateTime date, double price)
         {
             this.id = id;
@@ -50,6 +54,6 @@ namespace AssignmentBeta
         {
             get { return price; }
             set { price = value; }
-        }        
+        }       
     }
 }

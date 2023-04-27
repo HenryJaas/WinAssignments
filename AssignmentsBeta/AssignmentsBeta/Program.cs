@@ -12,11 +12,16 @@ namespace AssignmentBeta
         {
             AirlineCompany airline = new AirlineCompany("MyAirline");
 
-            airline[0]= new Flight(1, "New York", "Los Angeles", DateTime.Now.AddDays(10), 500);
-            airline[1]= new Flight(2, "Chicago", "Dallas", DateTime.Now.AddDays(20), 400);
-            airline[2]= new Flight(3, "Miami", "San Francisco", DateTime.Now.AddDays(30), 600);
+            //Flights("DateTime.Now.AddDays(10/20/30)= Adds 10/20/30 days from this day on)
 
-          
+            airline[0] = new Flight(1, "Vaasa", "Lahti", DateTime.Now.AddDays(10), 500);
+            airline[1] = new Flight(2, "Helsinki", "Kuusamo", DateTime.Now.AddDays(20), 400);
+            airline[2] = new Flight(3, "Kouvola", "Rovaniemi", DateTime.Now.AddDays(30), 600);
+            airline[3] = new Flight(4, "Savonlinna", "Porvoo", DateTime.Now.AddDays(40), 150);
+            airline[4] = new Flight(5, "Lapua", "Kuopio", DateTime.Now.AddDays(50), 900);
+
+            //Switch case menu
+
             bool exit = false;
 
             while (!exit)
@@ -35,9 +40,8 @@ namespace AssignmentBeta
                 {
                     case "1":
                         Console.WriteLine("\n------- ALL FLIGHTS -------");
-                        for (int i = 0; i < airline.Count; i++)
+                        foreach (Flight currentFlight in airline.GetFlightsByPrice())
                         {
-                            Flight currentFlight = airline[i];
                             Console.WriteLine($"Flight ID: {currentFlight.Id} | Origin: {currentFlight.Origin} | Destination: {currentFlight.Destination} | Date: {currentFlight.Date} | Price: {currentFlight.Price}");
                         }
                         break;
@@ -56,7 +60,7 @@ namespace AssignmentBeta
 
                     case "4":
                         Console.WriteLine("\n------- SEARCH FOR A FLIGHT -------");
-                        Console.Write("Enter flight ID to edit: ");
+                        Console.Write("Enter flight ID : ");
                         int searchId = int.Parse(Console.ReadLine());
 
                         Flight searchFlight = airline.FindFlight(searchId);

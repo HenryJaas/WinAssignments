@@ -8,53 +8,46 @@ namespace AssignmentBeta
 {
     public class AirlineCompany
     {
-
+        //A field to store the name of the airline
         readonly string airlineName;
+        //A sorted list to store the flights given by the airline
         SortedList<double, Flight> flights;
 
         public AirlineCompany(string airlineName)
         {
-            this.airlineName = airlineName;           
+            this.airlineName = airlineName;
+            this.flights = new SortedList<double, Flight>();
         }
-
-        public void AddFlight(Flight flight)
-        {
-            flights.Add(flight.Price, flight);
-        }
-
-        public void DeleteFlight(Flight flight)
-        {
-            flights.Remove(flight);
-        }
-
+             
         public Flight FindFlight(int id)
         {
-            foreach (Flight flight in flights.Keys)
+            foreach (Flight flight in flights.Values)
             {
+                //If ID matches return the flight
                 if (flight.Id == id)
                 {
                     return flight;
                 }
             }
-
             return null;
+        }
+        public List<Flight> GetFlightsByPrice()
+        {            
+            return flights.Values.ToList();
         }
 
         public Flight GetCheapestFlight()
         {
-            return flights.Keys[0];
+            // List is sorted by price so[0] is the cheapest
+            return flights.Values[0];
         }
 
         public Flight GetMostExpensiveFlight()
         {
-            return flights.Keys[flights.Count - 1];
+            //List is sorted by price so _flights.Count - 1 =Last one of the list is the most expensive one
+            return flights.Values[flights.Count - 1];
         }
-
-        public int Count
-        {
-            get { return flights.Count; }
-        }
-
+        //Gets or sets a flight at a given index
         public Flight this[int index]
         {
             get
@@ -72,14 +65,6 @@ namespace AssignmentBeta
             {
                 flights.Add(value.Price, value);
             }
-        }
-
-        private class FlightComparer : IComparer<Flight>
-        {
-            public int Compare(Flight x, Flight y)
-            {
-                return x.Price.CompareTo(y.Price);
-            }
-        }
+        }       
     }
 }
